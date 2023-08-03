@@ -109,11 +109,11 @@ $(document).ready(function(){initNavTree('group__jobs__constants.html',''); init
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ga2b2ec2a330942e5eb6fca9a597dcf8c4"><td class="memItemLeft" align="right" valign="top"><a id="ga2b2ec2a330942e5eb6fca9a597dcf8c4" name="ga2b2ec2a330942e5eb6fca9a597dcf8c4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>JOBS_THINGNAME_MAX_LENGTH</b>&#160;&#160;&#160;128U      /* per AWS IoT API Reference */</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>JOBS_THINGNAME_MAX_LENGTH</b>&#160;&#160;&#160;128U /* per AWS IoT API Reference */</td></tr>
 <tr class="memdesc:ga2b2ec2a330942e5eb6fca9a597dcf8c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length of a thing name for the AWS IoT Jobs Service. <br /></td></tr>
 <tr class="separator:ga2b2ec2a330942e5eb6fca9a597dcf8c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1725f6f0c1997682b3100e7d23d138a1"><td class="memItemLeft" align="right" valign="top"><a id="ga1725f6f0c1997682b3100e7d23d138a1" name="ga1725f6f0c1997682b3100e7d23d138a1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>JOBS_JOBID_MAX_LENGTH</b>&#160;&#160;&#160;64U       /* per AWS IoT API Reference */</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>JOBS_JOBID_MAX_LENGTH</b>&#160;&#160;&#160;64U /* per AWS IoT API Reference */</td></tr>
 <tr class="memdesc:ga1725f6f0c1997682b3100e7d23d138a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length of a job ID for the AWS IoT Jobs Service. <br /></td></tr>
 <tr class="separator:ga1725f6f0c1997682b3100e7d23d138a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3837d5c45a0628b3d771b2d55bba416b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__jobs__constants.html#ga3837d5c45a0628b3d771b2d55bba416b">JOBS_API_SUBSCRIBE_NEXTJOBCHANGED</a>(thingName)&#160;&#160;&#160;    JOBS_TOPIC_COMMON( thingName, JOBS_API_JOBID_NULL, JOBS_API_NEXTJOBCHANGED )</td></tr>
@@ -128,7 +128,7 @@ Macros</h2></td></tr>
 <tr class="memitem:ga9b70e9e9b21ae85d329d9a2470739ec7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__jobs__constants.html#ga9b70e9e9b21ae85d329d9a2470739ec7">JOBS_API_PUBLISH_GETPENDING</a>(thingName)&#160;&#160;&#160;    JOBS_TOPIC_COMMON( thingName, JOBS_API_JOBID_NULL, JOBS_API_GETPENDING )</td></tr>
 <tr class="memdesc:ga9b70e9e9b21ae85d329d9a2470739ec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Topic string for publishing to the GetPendingJobExecutions API.  <br /></td></tr>
 <tr class="separator:ga9b70e9e9b21ae85d329d9a2470739ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga106b0c4b9a3a805c0b26834c3c0b8bfa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__jobs__constants.html#ga106b0c4b9a3a805c0b26834c3c0b8bfa">JOBS_API_PUBLISH_DESCRIBENEXTJOB</a>(thingName)&#160;&#160;&#160;    JOBS_TOPIC_COMMON( thingName, JOBS_API_JOBID_NEXT JOBS_API_LEVEL_SEPARATOR, JOBS_API_DESCRIBE )</td></tr>
+<tr class="memitem:ga106b0c4b9a3a805c0b26834c3c0b8bfa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__jobs__constants.html#ga106b0c4b9a3a805c0b26834c3c0b8bfa">JOBS_API_PUBLISH_DESCRIBENEXTJOB</a>(thingName)</td></tr>
 <tr class="memdesc:ga106b0c4b9a3a805c0b26834c3c0b8bfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Topic string for querying the next pending job from the DescribeJobExecution API.  <br /></td></tr>
 <tr class="separator:ga106b0c4b9a3a805c0b26834c3c0b8bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabb375381728f738d2bf931b7dbd91103"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__jobs__constants.html#gabb375381728f738d2bf931b7dbd91103">JOBS_API_MAX_LENGTH</a>(thingNameLength)</td></tr>
@@ -257,11 +257,14 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">thingName</td><td>)</td>
-          <td>&#160;&#160;&#160;    JOBS_TOPIC_COMMON( thingName, JOBS_API_JOBID_NEXT JOBS_API_LEVEL_SEPARATOR, JOBS_API_DESCRIBE )</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">    JOBS_TOPIC_COMMON( thingName,                                    \</div>
+<div class="line">                       JOBS_API_JOBID_NEXT JOBS_API_LEVEL_SEPARATOR, \</div>
+<div class="line">                       JOBS_API_DESCRIBE )</div>
+</div><!-- fragment -->
 <p>Topic string for querying the next pending job from the DescribeJobExecution API. </p>
 <p>This macro should be used when the thing name and jobID are known at the compile time. If next pending job is being queried, use $next as job ID. If the thing name or job ID are not known at compile time, the <a class="el" href="jobs_8h.html#adfdc2db49fa5102fdb0e0b826e86b150" title="Populate a topic string for a DescribeJobExecution request.">Jobs_Describe</a> API should be used instead.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -288,10 +291,9 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    ( JOBS_API_COMMON_LENGTH( thingNameLength ) +                 \</div>
-<div class="line">      <a class="code hl_define" href="jobs_8h.html#a30bd49398cb42116098ed8b2e4afec8d">JOBID_MAX_LENGTH</a> + <span class="keyword">sizeof</span>( <span class="charliteral">&#39;/&#39;</span> ) + JOBS_API_UPDATE_LENGTH + \</div>
-<div class="line">      JOBS_API_SUCCESS_LENGTH + 1U )</div>
-<div class="ttc" id="ajobs_8h_html_a30bd49398cb42116098ed8b2e4afec8d"><div class="ttname"><a href="jobs_8h.html#a30bd49398cb42116098ed8b2e4afec8d">JOBID_MAX_LENGTH</a></div><div class="ttdeci">#define JOBID_MAX_LENGTH</div><div class="ttdoc">User defined maximum length of a job ID for the application.</div><div class="ttdef"><b>Definition:</b> jobs.h:73</div></div>
+<b>Value:</b><div class="fragment"><div class="line">    ( JOBS_API_COMMON_LENGTH( thingNameLength ) + <a class="code hl_define" href="jobs_8h.html#a30bd49398cb42116098ed8b2e4afec8d">JOBID_MAX_LENGTH</a> + \</div>
+<div class="line">      sizeof( <span class="charliteral">&#39;/&#39;</span> ) + JOBS_API_UPDATE_LENGTH + JOBS_API_SUCCESS_LENGTH + 1U )</div>
+<div class="ttc" id="ajobs_8h_html_a30bd49398cb42116098ed8b2e4afec8d"><div class="ttname"><a href="jobs_8h.html#a30bd49398cb42116098ed8b2e4afec8d">JOBID_MAX_LENGTH</a></div><div class="ttdeci">#define JOBID_MAX_LENGTH</div><div class="ttdoc">User defined maximum length of a job ID for the application.</div><div class="ttdef"><b>Definition:</b> jobs.h:76</div></div>
 </div><!-- fragment -->
 <p>The size needed to hold the longest topic for a given thing name length. </p>
 <dl class="section note"><dt>Note</dt><dd>This includes space for a terminating NUL character. </dd></dl>

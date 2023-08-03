@@ -115,11 +115,11 @@ $(document).ready(function(){initNavTree('jobs_8h.html',''); initResizable(); })
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ga2b2ec2a330942e5eb6fca9a597dcf8c4"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>JOBS_THINGNAME_MAX_LENGTH</b>&#160;&#160;&#160;128U      /* per AWS IoT API Reference */</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>JOBS_THINGNAME_MAX_LENGTH</b>&#160;&#160;&#160;128U /* per AWS IoT API Reference */</td></tr>
 <tr class="memdesc:ga2b2ec2a330942e5eb6fca9a597dcf8c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length of a thing name for the AWS IoT Jobs Service. <br /></td></tr>
 <tr class="separator:ga2b2ec2a330942e5eb6fca9a597dcf8c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1725f6f0c1997682b3100e7d23d138a1"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>JOBS_JOBID_MAX_LENGTH</b>&#160;&#160;&#160;64U       /* per AWS IoT API Reference */</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>JOBS_JOBID_MAX_LENGTH</b>&#160;&#160;&#160;64U /* per AWS IoT API Reference */</td></tr>
 <tr class="memdesc:ga1725f6f0c1997682b3100e7d23d138a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length of a job ID for the AWS IoT Jobs Service. <br /></td></tr>
 <tr class="separator:ga1725f6f0c1997682b3100e7d23d138a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad71fccb339adc1986401cb60fec0bc2b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jobs_8h.html#ad71fccb339adc1986401cb60fec0bc2b">THINGNAME_MAX_LENGTH</a>&#160;&#160;&#160;<a class="el" href="group__jobs__constants.html#ga2b2ec2a330942e5eb6fca9a597dcf8c4">JOBS_THINGNAME_MAX_LENGTH</a></td></tr>
@@ -140,7 +140,7 @@ Macros</h2></td></tr>
 <tr class="memitem:ga9b70e9e9b21ae85d329d9a2470739ec7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__jobs__constants.html#ga9b70e9e9b21ae85d329d9a2470739ec7">JOBS_API_PUBLISH_GETPENDING</a>(thingName)&#160;&#160;&#160;    JOBS_TOPIC_COMMON( thingName, JOBS_API_JOBID_NULL, JOBS_API_GETPENDING )</td></tr>
 <tr class="memdesc:ga9b70e9e9b21ae85d329d9a2470739ec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Topic string for publishing to the GetPendingJobExecutions API.  <br /></td></tr>
 <tr class="separator:ga9b70e9e9b21ae85d329d9a2470739ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga106b0c4b9a3a805c0b26834c3c0b8bfa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__jobs__constants.html#ga106b0c4b9a3a805c0b26834c3c0b8bfa">JOBS_API_PUBLISH_DESCRIBENEXTJOB</a>(thingName)&#160;&#160;&#160;    JOBS_TOPIC_COMMON( thingName, JOBS_API_JOBID_NEXT JOBS_API_LEVEL_SEPARATOR, JOBS_API_DESCRIBE )</td></tr>
+<tr class="memitem:ga106b0c4b9a3a805c0b26834c3c0b8bfa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__jobs__constants.html#ga106b0c4b9a3a805c0b26834c3c0b8bfa">JOBS_API_PUBLISH_DESCRIBENEXTJOB</a>(thingName)</td></tr>
 <tr class="memdesc:ga106b0c4b9a3a805c0b26834c3c0b8bfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Topic string for querying the next pending job from the DescribeJobExecution API.  <br /></td></tr>
 <tr class="separator:ga106b0c4b9a3a805c0b26834c3c0b8bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabb375381728f738d2bf931b7dbd91103"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__jobs__constants.html#gabb375381728f738d2bf931b7dbd91103">JOBS_API_MAX_LENGTH</a>(thingNameLength)</td></tr>
@@ -332,13 +332,14 @@ The AWS IoT Jobs service does not require clients to subscribe to the "/accepted
 <div class="line"><span class="keywordflow">if</span>( status == <a class="code hl_enumvalue" href="group__jobs__enum__types.html#ggacc72f7076cee5bd66a46453420d97921a23d9fa1f6d5d5e51f681e3682d9235f3">JobsSuccess</a> )</div>
 <div class="line">{</div>
 <div class="line">    <span class="comment">// The topic string of length, topicLength, has been</span></div>
-<div class="line">    <span class="comment">// generated in the buffer, topicBuffer, for the NextJobExecutionChanged API.</span></div>
+<div class="line">    <span class="comment">// generated in the buffer, topicBuffer, for the NextJobExecutionChanged</span></div>
+<div class="line">API.</div>
 <div class="line">    <span class="comment">// Subscribe to this topic using an MQTT client of your choice.</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__jobs__constants_html_gabb375381728f738d2bf931b7dbd91103"><div class="ttname"><a href="group__jobs__constants.html#gabb375381728f738d2bf931b7dbd91103">JOBS_API_MAX_LENGTH</a></div><div class="ttdeci">#define JOBS_API_MAX_LENGTH(thingNameLength)</div><div class="ttdoc">The size needed to hold the longest topic for a given thing name length.</div><div class="ttdef"><b>Definition:</b> jobs.h:217</div></div>
-<div class="ttc" id="agroup__jobs__enum__types_html_gacc72f7076cee5bd66a46453420d97921"><div class="ttname"><a href="group__jobs__enum__types.html#gacc72f7076cee5bd66a46453420d97921">JobsStatus_t</a></div><div class="ttdeci">JobsStatus_t</div><div class="ttdoc">Return codes from jobs functions.</div><div class="ttdef"><b>Definition:</b> jobs.h:227</div></div>
-<div class="ttc" id="agroup__jobs__enum__types_html_ggacc72f7076cee5bd66a46453420d97921a23d9fa1f6d5d5e51f681e3682d9235f3"><div class="ttname"><a href="group__jobs__enum__types.html#ggacc72f7076cee5bd66a46453420d97921a23d9fa1f6d5d5e51f681e3682d9235f3">JobsSuccess</a></div><div class="ttdeci">@ JobsSuccess</div><div class="ttdoc">The buffer was properly written or a match was found.</div><div class="ttdef"><b>Definition:</b> jobs.h:229</div></div>
-<div class="ttc" id="ajobs_8h_html_afe747bcbbd6eec4715b70df9f376de0a"><div class="ttname"><a href="jobs_8h.html#afe747bcbbd6eec4715b70df9f376de0a">Jobs_GetTopic</a></div><div class="ttdeci">JobsStatus_t Jobs_GetTopic(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, JobsTopic_t api, size_t *outLength)</div><div class="ttdoc">Populate a topic string for a subscription request.</div><div class="ttdef"><b>Definition:</b> jobs.c:266</div></div>
+<div class="ttc" id="agroup__jobs__constants_html_gabb375381728f738d2bf931b7dbd91103"><div class="ttname"><a href="group__jobs__constants.html#gabb375381728f738d2bf931b7dbd91103">JOBS_API_MAX_LENGTH</a></div><div class="ttdeci">#define JOBS_API_MAX_LENGTH(thingNameLength)</div><div class="ttdoc">The size needed to hold the longest topic for a given thing name length.</div><div class="ttdef"><b>Definition:</b> jobs.h:221</div></div>
+<div class="ttc" id="agroup__jobs__enum__types_html_gacc72f7076cee5bd66a46453420d97921"><div class="ttname"><a href="group__jobs__enum__types.html#gacc72f7076cee5bd66a46453420d97921">JobsStatus_t</a></div><div class="ttdeci">JobsStatus_t</div><div class="ttdoc">Return codes from jobs functions.</div><div class="ttdef"><b>Definition:</b> jobs.h:230</div></div>
+<div class="ttc" id="agroup__jobs__enum__types_html_ggacc72f7076cee5bd66a46453420d97921a23d9fa1f6d5d5e51f681e3682d9235f3"><div class="ttname"><a href="group__jobs__enum__types.html#ggacc72f7076cee5bd66a46453420d97921a23d9fa1f6d5d5e51f681e3682d9235f3">JobsSuccess</a></div><div class="ttdeci">@ JobsSuccess</div><div class="ttdoc">The buffer was properly written or a match was found.</div><div class="ttdef"><b>Definition:</b> jobs.h:232</div></div>
+<div class="ttc" id="ajobs_8h_html_afe747bcbbd6eec4715b70df9f376de0a"><div class="ttname"><a href="jobs_8h.html#afe747bcbbd6eec4715b70df9f376de0a">Jobs_GetTopic</a></div><div class="ttdeci">JobsStatus_t Jobs_GetTopic(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, JobsTopic_t api, size_t *outLength)</div><div class="ttdoc">Populate a topic string for a subscription request.</div><div class="ttdef"><b>Definition:</b> jobs.c:265</div></div>
 </div><!-- fragment --><p>See <a class="el" href="jobs_8h.html" title="Client library APIs for the AWS IoT Jobs service.">jobs.h</a> for docs. </p>
 
 </div>
@@ -427,7 +428,8 @@ Not all Jobs APIs have jobIDs within the topic string. NULL and 0 are output whe
 <div class="line"> </div>
 <div class="line"><span class="comment">// Every device should have a unique thing name registered with AWS IoT Core.</span></div>
 <div class="line"><span class="comment">// This example uses a dummy serial number for the thing name.</span></div>
-<div class="line"><span class="comment">// The Jobs_MatchTopic API will check that the incoming message topic contains</span></div>
+<div class="line"><span class="comment">// The Jobs_MatchTopic API will check that the incoming message topic</span></div>
+<div class="line">contains</div>
 <div class="line"><span class="comment">// this thing name.</span></div>
 <div class="line"><span class="preprocessor">#define THING_NAME           &quot;11223445566&quot;</span></div>
 <div class="line"><span class="preprocessor">#define THING_NAME_LENGTH    ( sizeof( THING_NAME ) - 1U )</span></div>
@@ -449,7 +451,8 @@ Not all Jobs APIs have jobIDs within the topic string. NULL and 0 are output whe
 <div class="line">{</div>
 <div class="line">    <span class="comment">// The Jobs_MatchTopic API has determined that the incoming topic is from</span></div>
 <div class="line">    <span class="comment">// AWS IoT Jobs service for the expected thing name.</span></div>
-<div class="line">    <span class="comment">// If the topic contains a jobID, then the pJobId and jobIdLength parameters</span></div>
+<div class="line">    <span class="comment">// If the topic contains a jobID, then the pJobId and jobIdLength</span></div>
+<div class="line">parameters</div>
 <div class="line">    <span class="comment">// populated by the API.</span></div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span>( api == JobsJobsChanged )</div>
@@ -461,19 +464,23 @@ Not all Jobs APIs have jobIDs within the topic string. NULL and 0 are output whe
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( api == JobsGetPendingSuccess )</div>
-<div class="line">    { <span class="comment">// Received accepted response for request to GetPendingJobExecutions API.</span></div>
+<div class="line">    { <span class="comment">// Received accepted response for request to GetPendingJobExecutions</span></div>
+<div class="line">API.</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( api == JobsGetPendingFailed )</div>
-<div class="line">    { <span class="comment">// Received rejected response for request to GetPendingJobExecutions API.</span></div>
+<div class="line">    { <span class="comment">// Received rejected response for request to GetPendingJobExecutions</span></div>
+<div class="line">API.</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( api == JobsStartNextSuccess )</div>
-<div class="line">    { <span class="comment">// Received accepted response for request to StartNextPendingJobExecution API.</span></div>
+<div class="line">    { <span class="comment">// Received accepted response for request to</span></div>
+<div class="line">StartNextPendingJobExecution API.</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( api == JobsStartNextFailed )</div>
-<div class="line">    { <span class="comment">// Received rejected response for request to StartNextPendingJobExecution API.</span></div>
+<div class="line">    { <span class="comment">// Received rejected response for request to</span></div>
+<div class="line">StartNextPendingJobExecution API.</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( api == JobsDescribeSuccess )</div>
@@ -496,8 +503,8 @@ Not all Jobs APIs have jobIDs within the topic string. NULL and 0 are output whe
 <div class="line">        <span class="comment">// Unexpected response.</span></div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__jobs__enum__types_html_ga315af209e86f50615c9e76948cf268ac"><div class="ttname"><a href="group__jobs__enum__types.html#ga315af209e86f50615c9e76948cf268ac">JobsTopic_t</a></div><div class="ttdeci">JobsTopic_t</div><div class="ttdoc">Topic values for subscription requests.</div><div class="ttdef"><b>Definition:</b> jobs.h:252</div></div>
-<div class="ttc" id="ajobs_8h_html_ae3e1205f419d335dcf9b338f0db19815"><div class="ttname"><a href="jobs_8h.html#ae3e1205f419d335dcf9b338f0db19815">Jobs_MatchTopic</a></div><div class="ttdeci">JobsStatus_t Jobs_MatchTopic(char *topic, size_t length, const char *thingName, uint16_t thingNameLength, JobsTopic_t *outApi, char **outJobId, uint16_t *outJobIdLength)</div><div class="ttdoc">Output a topic value if a Jobs API topic string is present. Optionally, output a pointer to a jobID w...</div><div class="ttdef"><b>Definition:</b> jobs.c:546</div></div>
+<div class="ttc" id="agroup__jobs__enum__types_html_ga315af209e86f50615c9e76948cf268ac"><div class="ttname"><a href="group__jobs__enum__types.html#ga315af209e86f50615c9e76948cf268ac">JobsTopic_t</a></div><div class="ttdeci">JobsTopic_t</div><div class="ttdoc">Topic values for subscription requests.</div><div class="ttdef"><b>Definition:</b> jobs.h:257</div></div>
+<div class="ttc" id="ajobs_8h_html_ae3e1205f419d335dcf9b338f0db19815"><div class="ttname"><a href="jobs_8h.html#ae3e1205f419d335dcf9b338f0db19815">Jobs_MatchTopic</a></div><div class="ttdeci">JobsStatus_t Jobs_MatchTopic(char *topic, size_t length, const char *thingName, uint16_t thingNameLength, JobsTopic_t *outApi, char **outJobId, uint16_t *outJobIdLength)</div><div class="ttdoc">Output a topic value if a Jobs API topic string is present. Optionally, output a pointer to a jobID w...</div><div class="ttdef"><b>Definition:</b> jobs.c:583</div></div>
 </div><!-- fragment --><p>Output a topic value if a Jobs API topic string is present. Optionally, output a pointer to a jobID within the topic and its length.</p>
 <p>See <a class="el" href="jobs_8h.html" title="Client library APIs for the AWS IoT Jobs service.">jobs.h</a> for docs. </p>
 
@@ -586,10 +593,11 @@ The AWS IoT Jobs service does not require clients to subscribe to the "/accepted
 <div class="line"><span class="keywordflow">if</span>( status == <a class="code hl_enumvalue" href="group__jobs__enum__types.html#ggacc72f7076cee5bd66a46453420d97921a23d9fa1f6d5d5e51f681e3682d9235f3">JobsSuccess</a> )</div>
 <div class="line">{</div>
 <div class="line">    <span class="comment">// The topic string of length, topicLength, has been</span></div>
-<div class="line">    <span class="comment">// generated in the buffer, topicBuffer, for the GetPendingJobExecutions API.</span></div>
+<div class="line">    <span class="comment">// generated in the buffer, topicBuffer, for the GetPendingJobExecutions</span></div>
+<div class="line">API.</div>
 <div class="line">    <span class="comment">// Publish to this topic using an MQTT client of your choice.</span></div>
 <div class="line">}</div>
-<div class="ttc" id="ajobs_8h_html_a5b4fd584f0400e51b1d29189b24c91a5"><div class="ttname"><a href="jobs_8h.html#a5b4fd584f0400e51b1d29189b24c91a5">Jobs_GetPending</a></div><div class="ttdeci">JobsStatus_t Jobs_GetPending(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, size_t *outLength)</div><div class="ttdoc">Populate a topic string for a GetPendingJobExecutions request.</div><div class="ttdef"><b>Definition:</b> jobs.c:606</div></div>
+<div class="ttc" id="ajobs_8h_html_a5b4fd584f0400e51b1d29189b24c91a5"><div class="ttname"><a href="jobs_8h.html#a5b4fd584f0400e51b1d29189b24c91a5">Jobs_GetPending</a></div><div class="ttdeci">JobsStatus_t Jobs_GetPending(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, size_t *outLength)</div><div class="ttdoc">Populate a topic string for a GetPendingJobExecutions request.</div><div class="ttdef"><b>Definition:</b> jobs.c:647</div></div>
 </div><!-- fragment --><p>See <a class="el" href="jobs_8h.html" title="Client library APIs for the AWS IoT Jobs service.">jobs.h</a> for docs. </p>
 
 </div>
@@ -680,7 +688,7 @@ The AWS IoT Jobs service does not require clients to subscribe to the "/accepted
 <div class="line">    <span class="comment">// the buffer, topicBuffer, for the StartNextPendingJobExecution API.</span></div>
 <div class="line">    <span class="comment">// Publish to this topic using an MQTT client of your choice.</span></div>
 <div class="line">}</div>
-<div class="ttc" id="ajobs_8h_html_ad69cddd288dd61b3716021478725c174"><div class="ttname"><a href="jobs_8h.html#ad69cddd288dd61b3716021478725c174">Jobs_StartNext</a></div><div class="ttdeci">JobsStatus_t Jobs_StartNext(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, size_t *outLength)</div><div class="ttdoc">Populate a topic string for a StartNextPendingJobExecution request.</div><div class="ttdef"><b>Definition:</b> jobs.c:639</div></div>
+<div class="ttc" id="ajobs_8h_html_ad69cddd288dd61b3716021478725c174"><div class="ttname"><a href="jobs_8h.html#ad69cddd288dd61b3716021478725c174">Jobs_StartNext</a></div><div class="ttdeci">JobsStatus_t Jobs_StartNext(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, size_t *outLength)</div><div class="ttdoc">Populate a topic string for a StartNextPendingJobExecution request.</div><div class="ttdef"><b>Definition:</b> jobs.c:683</div></div>
 </div><!-- fragment --><p>See <a class="el" href="jobs_8h.html" title="Client library APIs for the AWS IoT Jobs service.">jobs.h</a> for docs. </p>
 
 </div>
@@ -794,7 +802,7 @@ The AWS IoT Jobs service does not require clients to subscribe to the "/accepted
 <div class="line">    <span class="comment">// the buffer, topicBuffer, for the DescribeJobExecution API.</span></div>
 <div class="line">    <span class="comment">// Publish to this topic using an MQTT client of your choice.</span></div>
 <div class="line">}</div>
-<div class="ttc" id="ajobs_8h_html_adfdc2db49fa5102fdb0e0b826e86b150"><div class="ttname"><a href="jobs_8h.html#adfdc2db49fa5102fdb0e0b826e86b150">Jobs_Describe</a></div><div class="ttdeci">JobsStatus_t Jobs_Describe(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, const char *jobId, uint16_t jobIdLength, size_t *outLength)</div><div class="ttdoc">Populate a topic string for a DescribeJobExecution request.</div><div class="ttdef"><b>Definition:</b> jobs.c:673</div></div>
+<div class="ttc" id="ajobs_8h_html_adfdc2db49fa5102fdb0e0b826e86b150"><div class="ttname"><a href="jobs_8h.html#adfdc2db49fa5102fdb0e0b826e86b150">Jobs_Describe</a></div><div class="ttdeci">JobsStatus_t Jobs_Describe(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, const char *jobId, uint16_t jobIdLength, size_t *outLength)</div><div class="ttdoc">Populate a topic string for a DescribeJobExecution request.</div><div class="ttdef"><b>Definition:</b> jobs.c:719</div></div>
 </div><!-- fragment --><p>See <a class="el" href="jobs_8h.html" title="Client library APIs for the AWS IoT Jobs service.">jobs.h</a> for docs. </p>
 
 </div>
@@ -906,7 +914,7 @@ The AWS IoT Jobs service does not require clients to subscribe to the "/accepted
 <div class="line">    <span class="comment">// generated in the buffer, topicBuffer, for the UpdateJobExecution API.</span></div>
 <div class="line">    <span class="comment">// Publish to this topic using an MQTT client of your choice.</span></div>
 <div class="line">}</div>
-<div class="ttc" id="ajobs_8h_html_a4ab3fd29173814ab73d764d123e9f400"><div class="ttname"><a href="jobs_8h.html#a4ab3fd29173814ab73d764d123e9f400">Jobs_Update</a></div><div class="ttdeci">JobsStatus_t Jobs_Update(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, const char *jobId, uint16_t jobIdLength, size_t *outLength)</div><div class="ttdoc">Populate a topic string for an UpdateJobExecution request.</div><div class="ttdef"><b>Definition:</b> jobs.c:714</div></div>
+<div class="ttc" id="ajobs_8h_html_a4ab3fd29173814ab73d764d123e9f400"><div class="ttname"><a href="jobs_8h.html#a4ab3fd29173814ab73d764d123e9f400">Jobs_Update</a></div><div class="ttdeci">JobsStatus_t Jobs_Update(char *buffer, size_t length, const char *thingName, uint16_t thingNameLength, const char *jobId, uint16_t jobIdLength, size_t *outLength)</div><div class="ttdoc">Populate a topic string for an UpdateJobExecution request.</div><div class="ttdef"><b>Definition:</b> jobs.c:762</div></div>
 </div><!-- fragment --><p>See <a class="el" href="jobs_8h.html" title="Client library APIs for the AWS IoT Jobs service.">jobs.h</a> for docs. </p>
 
 </div>
