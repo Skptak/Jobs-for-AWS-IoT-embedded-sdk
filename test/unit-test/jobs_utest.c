@@ -4,22 +4,23 @@
  *
  * SPDX-License-Identifier: MIT
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 /**
@@ -29,23 +30,23 @@
 
 #include <ctype.h>
 
-#include "unity.h"
 #include "catch_assert.h"
+#include "unity.h"
 
 /* Include paths for public enums, structures, and macros. */
 #include "jobs.h"
 #include "jobs_annex.h"
 
 /* thing name */
-#define name_           "foobar"
-#define nameLength_     ( sizeof( name_ ) - 1 )
+#define name_        "foobar"
+#define nameLength_  ( sizeof( name_ ) - 1 )
 
 /* job ID */
-#define jobId_          "1234"
-#define jobIdLength_    ( sizeof( jobId_ ) - 1 )
+#define jobId_       "1234"
+#define jobIdLength_ ( sizeof( jobId_ ) - 1 )
 
 /* Common prefix of Jobs topics. */
-#define PREFIX          JOBS_API_PREFIX name_ JOBS_API_BRIDGE
+#define PREFIX       JOBS_API_PREFIX name_ JOBS_API_BRIDGE
 
 jmp_buf CATCH_JMPBUF;
 
@@ -83,25 +84,29 @@ void test_JobsPUBLISH__API_macros_are_v( void )
 
     /* Test for NextJobExecutionChanged API topic. */
     expectedTopic = PREFIX JOBS_API_NEXTJOBCHANGED;
-    TEST_ASSERT_EQUAL_STRING( expectedTopic, JOBS_API_SUBSCRIBE_NEXTJOBCHANGED( name_ ) );
+    TEST_ASSERT_EQUAL_STRING( expectedTopic,
+                              JOBS_API_SUBSCRIBE_NEXTJOBCHANGED( name_ ) );
 
     /* Test for JobExecutionsChanged API topic. */
     expectedTopic = PREFIX JOBS_API_JOBSCHANGED;
-    TEST_ASSERT_EQUAL_STRING( expectedTopic, JOBS_API_SUBSCRIBE_JOBSCHANGED( name_ ) );
+    TEST_ASSERT_EQUAL_STRING( expectedTopic,
+                              JOBS_API_SUBSCRIBE_JOBSCHANGED( name_ ) );
 
     /* Test for StartNextPendingJobExecution API topic. */
     expectedTopic = PREFIX JOBS_API_STARTNEXT;
-    TEST_ASSERT_EQUAL_STRING( expectedTopic, JOBS_API_PUBLISH_STARTNEXT( name_ ) );
+    TEST_ASSERT_EQUAL_STRING( expectedTopic,
+                              JOBS_API_PUBLISH_STARTNEXT( name_ ) );
 
     /* Test for GetPendingJobExecutions API topic. */
     expectedTopic = PREFIX JOBS_API_GETPENDING;
-    TEST_ASSERT_EQUAL_STRING( expectedTopic, JOBS_API_PUBLISH_GETPENDING( name_ ) );
+    TEST_ASSERT_EQUAL_STRING( expectedTopic,
+                              JOBS_API_PUBLISH_GETPENDING( name_ ) );
 
     /* Test for DescribeJobExecution API topic for the "$next" job ID. */
     expectedTopic = PREFIX JOBS_API_JOBID_NEXT "/" JOBS_API_DESCRIBE;
-    TEST_ASSERT_EQUAL_STRING( expectedTopic, JOBS_API_PUBLISH_DESCRIBENEXTJOB( name_ ) );
+    TEST_ASSERT_EQUAL_STRING( expectedTopic,
+                              JOBS_API_PUBLISH_DESCRIBENEXTJOB( name_ ) );
 }
-
 
 /**
  * @brief Test that all topic enums are contiguous
@@ -149,75 +154,294 @@ void test_Jobs_bad_parameters( void )
     uint16_t outJobIdLength;
     size_t outLength;
 
-#define TEST_BAD_PARAMETER( x ) \
-    TEST_ASSERT_EQUAL( JobsBadParameter, ( x ) )
+#define TEST_BAD_PARAMETER( x ) TEST_ASSERT_EQUAL( JobsBadParameter, ( x ) )
 
     /* buf is NULL */
-    TEST_BAD_PARAMETER( Jobs_GetTopic( NULL, sizeof( buf ), name_, nameLength_, JobsUpdateSuccess, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_MatchTopic( NULL, sizeof( buf ), name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
-    TEST_BAD_PARAMETER( Jobs_GetPending( NULL, sizeof( buf ), name_, nameLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_StartNext( NULL, sizeof( buf ), name_, nameLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Describe( NULL, sizeof( buf ), name_, nameLength_, jobId_, jobIdLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( NULL, sizeof( buf ), name_, nameLength_, jobId_, jobIdLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_GetTopic( NULL,
+                                       sizeof( buf ),
+                                       name_,
+                                       nameLength_,
+                                       JobsUpdateSuccess,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_MatchTopic( NULL,
+                                         sizeof( buf ),
+                                         name_,
+                                         nameLength_,
+                                         &outApi,
+                                         &outJobId,
+                                         &outJobIdLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_GetPending( NULL, sizeof( buf ), name_, nameLength_, &outLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_StartNext( NULL, sizeof( buf ), name_, nameLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( NULL,
+                                       sizeof( buf ),
+                                       name_,
+                                       nameLength_,
+                                       jobId_,
+                                       jobIdLength_,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( NULL,
+                                     sizeof( buf ),
+                                     name_,
+                                     nameLength_,
+                                     jobId_,
+                                     jobIdLength_,
+                                     &outLength ) );
 
     /* length is 0 */
-    TEST_BAD_PARAMETER( Jobs_GetTopic( buf, 0, name_, nameLength_, JobsUpdateSuccess, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf, 0, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
-    TEST_BAD_PARAMETER( Jobs_GetPending( buf, 0, name_, nameLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_StartNext( buf, 0, name_, nameLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Describe( buf, 0, name_, nameLength_, jobId_, jobIdLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( buf, 0, name_, nameLength_, jobId_, jobIdLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_GetTopic( buf,
+                                       0,
+                                       name_,
+                                       nameLength_,
+                                       JobsUpdateSuccess,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf,
+                                         0,
+                                         name_,
+                                         nameLength_,
+                                         &outApi,
+                                         &outJobId,
+                                         &outJobIdLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_GetPending( buf, 0, name_, nameLength_, &outLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_StartNext( buf, 0, name_, nameLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( buf,
+                                       0,
+                                       name_,
+                                       nameLength_,
+                                       jobId_,
+                                       jobIdLength_,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( buf,
+                                     0,
+                                     name_,
+                                     nameLength_,
+                                     jobId_,
+                                     jobIdLength_,
+                                     &outLength ) );
 
     /* name is NULL */
-    TEST_BAD_PARAMETER( Jobs_GetTopic( buf, sizeof( buf ), NULL, nameLength_, JobsUpdateSuccess, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf, sizeof( buf ), NULL, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
-    TEST_BAD_PARAMETER( Jobs_GetPending( buf, sizeof( buf ), NULL, nameLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_StartNext( buf, sizeof( buf ), NULL, nameLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Describe( buf, sizeof( buf ), NULL, nameLength_, jobId_, jobIdLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( buf, sizeof( buf ), NULL, nameLength_, jobId_, jobIdLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_GetTopic( buf,
+                                       sizeof( buf ),
+                                       NULL,
+                                       nameLength_,
+                                       JobsUpdateSuccess,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf,
+                                         sizeof( buf ),
+                                         NULL,
+                                         nameLength_,
+                                         &outApi,
+                                         &outJobId,
+                                         &outJobIdLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_GetPending( buf, sizeof( buf ), NULL, nameLength_, &outLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_StartNext( buf, sizeof( buf ), NULL, nameLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( buf,
+                                       sizeof( buf ),
+                                       NULL,
+                                       nameLength_,
+                                       jobId_,
+                                       jobIdLength_,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( buf,
+                                     sizeof( buf ),
+                                     NULL,
+                                     nameLength_,
+                                     jobId_,
+                                     jobIdLength_,
+                                     &outLength ) );
 
     /* bad thing name - variations tested separately */
-    TEST_BAD_PARAMETER( Jobs_GetTopic( buf, sizeof( buf ), "!", nameLength_, JobsUpdateSuccess, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf, sizeof( buf ), "!", nameLength_, &outApi, &outJobId, &outJobIdLength ) );
-    TEST_BAD_PARAMETER( Jobs_GetPending( buf, sizeof( buf ), "!", nameLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_StartNext( buf, sizeof( buf ), "!", nameLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Describe( buf, sizeof( buf ), "!", nameLength_, jobId_, jobIdLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( buf, sizeof( buf ), "!", nameLength_, jobId_, jobIdLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_GetTopic( buf,
+                                       sizeof( buf ),
+                                       "!",
+                                       nameLength_,
+                                       JobsUpdateSuccess,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf,
+                                         sizeof( buf ),
+                                         "!",
+                                         nameLength_,
+                                         &outApi,
+                                         &outJobId,
+                                         &outJobIdLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_GetPending( buf, sizeof( buf ), "!", nameLength_, &outLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_StartNext( buf, sizeof( buf ), "!", nameLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( buf,
+                                       sizeof( buf ),
+                                       "!",
+                                       nameLength_,
+                                       jobId_,
+                                       jobIdLength_,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( buf,
+                                     sizeof( buf ),
+                                     "!",
+                                     nameLength_,
+                                     jobId_,
+                                     jobIdLength_,
+                                     &outLength ) );
 
     /* bad thing name length */
-    TEST_BAD_PARAMETER( Jobs_GetTopic( buf, sizeof( buf ), name_, 0, JobsUpdateSuccess, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf, sizeof( buf ), name_, 0, &outApi, &outJobId, &outJobIdLength ) );
-    TEST_BAD_PARAMETER( Jobs_GetPending( buf, sizeof( buf ), name_, 0, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_StartNext( buf, sizeof( buf ), name_, 0, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Describe( buf, sizeof( buf ), name_, 0, jobId_, jobIdLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( buf, sizeof( buf ), name_, 0, jobId_, jobIdLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_GetTopic( buf, sizeof( buf ), name_, ( THINGNAME_MAX_LENGTH + 1 ), JobsUpdateSuccess, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf, sizeof( buf ), name_, ( THINGNAME_MAX_LENGTH + 1 ), &outApi, &outJobId, &outJobIdLength ) );
-    TEST_BAD_PARAMETER( Jobs_GetPending( buf, sizeof( buf ), name_, ( THINGNAME_MAX_LENGTH + 1 ), &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_StartNext( buf, sizeof( buf ), name_, ( THINGNAME_MAX_LENGTH + 1 ), &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Describe( buf, sizeof( buf ), name_, ( THINGNAME_MAX_LENGTH + 1 ), jobId_, jobIdLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( buf, sizeof( buf ), name_, ( THINGNAME_MAX_LENGTH + 1 ), jobId_, jobIdLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_GetTopic( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       0,
+                                       JobsUpdateSuccess,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf,
+                                         sizeof( buf ),
+                                         name_,
+                                         0,
+                                         &outApi,
+                                         &outJobId,
+                                         &outJobIdLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_GetPending( buf, sizeof( buf ), name_, 0, &outLength ) );
+    TEST_BAD_PARAMETER(
+        Jobs_StartNext( buf, sizeof( buf ), name_, 0, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       0,
+                                       jobId_,
+                                       jobIdLength_,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( buf,
+                                     sizeof( buf ),
+                                     name_,
+                                     0,
+                                     jobId_,
+                                     jobIdLength_,
+                                     &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_GetTopic( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       ( THINGNAME_MAX_LENGTH + 1 ),
+                                       JobsUpdateSuccess,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf,
+                                         sizeof( buf ),
+                                         name_,
+                                         ( THINGNAME_MAX_LENGTH + 1 ),
+                                         &outApi,
+                                         &outJobId,
+                                         &outJobIdLength ) );
+    TEST_BAD_PARAMETER( Jobs_GetPending( buf,
+                                         sizeof( buf ),
+                                         name_,
+                                         ( THINGNAME_MAX_LENGTH + 1 ),
+                                         &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_StartNext( buf,
+                                        sizeof( buf ),
+                                        name_,
+                                        ( THINGNAME_MAX_LENGTH + 1 ),
+                                        &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       ( THINGNAME_MAX_LENGTH + 1 ),
+                                       jobId_,
+                                       jobIdLength_,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( buf,
+                                     sizeof( buf ),
+                                     name_,
+                                     ( THINGNAME_MAX_LENGTH + 1 ),
+                                     jobId_,
+                                     jobIdLength_,
+                                     &outLength ) );
 
     /* job ID is NULL */
-    TEST_BAD_PARAMETER( Jobs_Describe( buf, sizeof( buf ), name_, nameLength_, NULL, jobIdLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( buf, sizeof( buf ), name_, nameLength_, NULL, jobIdLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       nameLength_,
+                                       NULL,
+                                       jobIdLength_,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( buf,
+                                     sizeof( buf ),
+                                     name_,
+                                     nameLength_,
+                                     NULL,
+                                     jobIdLength_,
+                                     &outLength ) );
 
     /* bad job ID - variations tested separately */
-    TEST_BAD_PARAMETER( Jobs_Describe( buf, sizeof( buf ), name_, nameLength_, "!", jobIdLength_, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( buf, sizeof( buf ), name_, nameLength_, "!", jobIdLength_, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       nameLength_,
+                                       "!",
+                                       jobIdLength_,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( buf,
+                                     sizeof( buf ),
+                                     name_,
+                                     nameLength_,
+                                     "!",
+                                     jobIdLength_,
+                                     &outLength ) );
 
     /* bad job ID length */
-    TEST_BAD_PARAMETER( Jobs_Describe( buf, sizeof( buf ), name_, nameLength_, jobId_, 0, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( buf, sizeof( buf ), name_, nameLength_, jobId_, 0, &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Describe( buf, sizeof( buf ), name_, nameLength_, jobId_, ( JOBID_MAX_LENGTH + 1 ), &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_Update( buf, sizeof( buf ), name_, nameLength_, jobId_, ( JOBID_MAX_LENGTH + 1 ), &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       nameLength_,
+                                       jobId_,
+                                       0,
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( buf,
+                                     sizeof( buf ),
+                                     name_,
+                                     nameLength_,
+                                     jobId_,
+                                     0,
+                                     &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Describe( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       nameLength_,
+                                       jobId_,
+                                       ( JOBID_MAX_LENGTH + 1 ),
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_Update( buf,
+                                     sizeof( buf ),
+                                     name_,
+                                     nameLength_,
+                                     jobId_,
+                                     ( JOBID_MAX_LENGTH + 1 ),
+                                     &outLength ) );
 
     /* outAPI is NULL */
-    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf, sizeof( buf ), name_, nameLength_, NULL, &outJobId, &outJobIdLength ) );
+    TEST_BAD_PARAMETER( Jobs_MatchTopic( buf,
+                                         sizeof( buf ),
+                                         name_,
+                                         nameLength_,
+                                         NULL,
+                                         &outJobId,
+                                         &outJobIdLength ) );
 
     /* bad API value */
-    TEST_BAD_PARAMETER( Jobs_GetTopic( buf, sizeof( buf ), name_, nameLength_, ( JobsInvalidTopic - 1 ), &outLength ) );
-    TEST_BAD_PARAMETER( Jobs_GetTopic( buf, sizeof( buf ), name_, nameLength_, JobsMaxTopic, &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_GetTopic( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       nameLength_,
+                                       ( JobsInvalidTopic - 1 ),
+                                       &outLength ) );
+    TEST_BAD_PARAMETER( Jobs_GetTopic( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       nameLength_,
+                                       JobsMaxTopic,
+                                       &outLength ) );
 }
 
 /**
@@ -232,33 +456,59 @@ void test_Jobs_valid_identifiers( void )
     size_t outLength;
     char c;
 
-#define commonChars                      \
-    "-" "_" "0123456789"                 \
-            "ABCDEFGHIJKLMNOPQRSTUVWYXZ" \
-            "abcdefghijklmnopqrstuvwyxz"
+#define commonChars              \
+    "-"                          \
+    "_"                          \
+    "0123456789"                 \
+    "ABCDEFGHIJKLMNOPQRSTUVWYXZ" \
+    "abcdefghijklmnopqrstuvwyxz"
 
     char testChars[] = commonChars;
 
-    ret = Jobs_GetPending( buf, sizeof( buf ), testChars, ( sizeof( testChars ) - 1 ), &outLength );
+    ret = Jobs_GetPending( buf,
+                           sizeof( buf ),
+                           testChars,
+                           ( sizeof( testChars ) - 1 ),
+                           &outLength );
     TEST_ASSERT_EQUAL( JobsSuccess, ret );
 
-    ret = Jobs_Describe( buf, sizeof( buf ), name_, nameLength_, testChars, ( sizeof( testChars ) - 1 ), &outLength );
+    ret = Jobs_Describe( buf,
+                         sizeof( buf ),
+                         name_,
+                         nameLength_,
+                         testChars,
+                         ( sizeof( testChars ) - 1 ),
+                         &outLength );
     TEST_ASSERT_EQUAL( JobsSuccess, ret );
 
     /* thing name allows colon. */
     testChars[ 0 ] = ':';
-    ret = Jobs_GetPending( buf, sizeof( buf ), testChars, ( sizeof( testChars ) - 1 ), &outLength );
+    ret = Jobs_GetPending( buf,
+                           sizeof( buf ),
+                           testChars,
+                           ( sizeof( testChars ) - 1 ),
+                           &outLength );
     TEST_ASSERT_EQUAL( JobsSuccess, ret );
 
     /* job ID disallows colon. */
-    ret = Jobs_Describe( buf, sizeof( buf ), name_, nameLength_, testChars, ( sizeof( testChars ) - 1 ), &outLength );
+    ret = Jobs_Describe( buf,
+                         sizeof( buf ),
+                         name_,
+                         nameLength_,
+                         testChars,
+                         ( sizeof( testChars ) - 1 ),
+                         &outLength );
     TEST_ASSERT_EQUAL( JobsBadParameter, ret );
 
     /* Test all ASCII characters excluding NUL. */
     for( c = 1; c > 0; c++ )
     {
         testChars[ 0 ] = c;
-        ret = Jobs_GetPending( buf, sizeof( buf ), testChars, ( sizeof( testChars ) - 1 ), &outLength );
+        ret = Jobs_GetPending( buf,
+                               sizeof( buf ),
+                               testChars,
+                               ( sizeof( testChars ) - 1 ),
+                               &outLength );
 
         if( ( c == ':' ) || ( c == '-' ) || ( c == '_' ) || isalnum( c ) )
         {
@@ -271,7 +521,13 @@ void test_Jobs_valid_identifiers( void )
     }
 
     /* Test additional valid jobId, $next */
-    ret = Jobs_Describe( buf, sizeof( buf ), name_, nameLength_, JOBS_API_JOBID_NEXT, JOBS_API_JOBID_NEXT_LENGTH, &outLength );
+    ret = Jobs_Describe( buf,
+                         sizeof( buf ),
+                         name_,
+                         nameLength_,
+                         JOBS_API_JOBID_NEXT,
+                         JOBS_API_JOBID_NEXT_LENGTH,
+                         &outLength );
     TEST_ASSERT_EQUAL( JobsSuccess, ret );
 }
 
@@ -288,19 +544,35 @@ void test_Jobs_buffer_lengths( void )
     size_t len;
     unsigned i = 0;
     char expected1[] = JOBS_API_SUBSCRIBE_JOBSCHANGED( name_ );
-    char expected2[] = JOBS_API_PREFIX name_ JOBS_API_BRIDGE "+/" JOBS_API_UPDATE JOBS_API_SUCCESS;
+    char expected2[] = JOBS_API_PREFIX name_ JOBS_API_BRIDGE
+        "+/" JOBS_API_UPDATE JOBS_API_SUCCESS;
 
-    ret = Jobs_GetTopic( buf, sizeof( buf ), name_, nameLength_, JobsJobsChanged, NULL );
+    ret = Jobs_GetTopic( buf,
+                         sizeof( buf ),
+                         name_,
+                         nameLength_,
+                         JobsJobsChanged,
+                         NULL );
     TEST_ASSERT_EQUAL( JobsSuccess, ret );
     TEST_ASSERT_EQUAL_STRING( expected1, buf );
 
-    ret = Jobs_GetTopic( buf, sizeof( buf ), name_, nameLength_, JobsUpdateSuccess, NULL );
+    ret = Jobs_GetTopic( buf,
+                         sizeof( buf ),
+                         name_,
+                         nameLength_,
+                         JobsUpdateSuccess,
+                         NULL );
     TEST_ASSERT_EQUAL( JobsSuccess, ret );
     TEST_ASSERT_EQUAL_STRING( expected2, buf );
 
     for( i = 1; i < sizeof( expected2 ); i++ )
     {
-        ret = Jobs_GetTopic( buf, i, name_, nameLength_, JobsUpdateSuccess, &len );
+        ret = Jobs_GetTopic( buf,
+                             i,
+                             name_,
+                             nameLength_,
+                             JobsUpdateSuccess,
+                             &len );
         TEST_ASSERT_EQUAL( JobsBufferTooSmall, ret );
         TEST_ASSERT_EQUAL( '\0', buf[ len ] );
     }
@@ -320,65 +592,134 @@ void test_Jobs_happy_path( void )
     char prefix[] = PREFIX;
 
 #define TEST_SUCCESS( x )                          \
-    do {                                           \
+    do                                             \
+    {                                              \
         TEST_ASSERT_EQUAL( JobsSuccess, ( x ) );   \
         TEST_ASSERT_EQUAL_STRING( expected, buf ); \
     } while( 0 )
 
 #define TEST_TOO_SMALL( x )                             \
-    do {                                                \
+    do                                                  \
+    {                                                   \
         TEST_ASSERT_EQUAL( JobsBufferTooSmall, ( x ) ); \
         TEST_ASSERT_EQUAL_STRING( prefix, buf );        \
     } while( 0 )
 
-#define TEST_OUTLENGTH( x ) \
-    TEST_ASSERT_EQUAL( ( sizeof( x ) - 1 ), outLength )
+#define TEST_OUTLENGTH( x ) TEST_ASSERT_EQUAL( ( sizeof( x ) - 1 ), outLength )
 
     {
         char expected[] = JOBS_API_PUBLISH_GETPENDING( name_ );
 
-        TEST_SUCCESS( Jobs_GetPending( buf, sizeof( buf ), name_, nameLength_, NULL ) );
-        TEST_SUCCESS( Jobs_GetPending( buf, sizeof( buf ), name_, nameLength_, &outLength ) );
+        TEST_SUCCESS(
+            Jobs_GetPending( buf, sizeof( buf ), name_, nameLength_, NULL ) );
+        TEST_SUCCESS( Jobs_GetPending( buf,
+                                       sizeof( buf ),
+                                       name_,
+                                       nameLength_,
+                                       &outLength ) );
         TEST_OUTLENGTH( expected );
 
-        TEST_TOO_SMALL( Jobs_GetPending( buf, sizeof( prefix ), name_, nameLength_, NULL ) );
-        TEST_TOO_SMALL( Jobs_GetPending( buf, sizeof( prefix ), name_, nameLength_, &outLength ) );
+        TEST_TOO_SMALL(
+            Jobs_GetPending( buf, sizeof( prefix ), name_, nameLength_, NULL ) );
+        TEST_TOO_SMALL( Jobs_GetPending( buf,
+                                         sizeof( prefix ),
+                                         name_,
+                                         nameLength_,
+                                         &outLength ) );
         TEST_OUTLENGTH( prefix );
     }
 
     {
         char expected[] = JOBS_API_PUBLISH_STARTNEXT( name_ );
 
-        TEST_SUCCESS( Jobs_StartNext( buf, sizeof( buf ), name_, nameLength_, NULL ) );
-        TEST_SUCCESS( Jobs_StartNext( buf, sizeof( buf ), name_, nameLength_, &outLength ) );
+        TEST_SUCCESS(
+            Jobs_StartNext( buf, sizeof( buf ), name_, nameLength_, NULL ) );
+        TEST_SUCCESS( Jobs_StartNext( buf,
+                                      sizeof( buf ),
+                                      name_,
+                                      nameLength_,
+                                      &outLength ) );
         TEST_OUTLENGTH( expected );
 
-        TEST_TOO_SMALL( Jobs_StartNext( buf, sizeof( prefix ), name_, nameLength_, NULL ) );
-        TEST_TOO_SMALL( Jobs_StartNext( buf, sizeof( prefix ), name_, nameLength_, &outLength ) );
+        TEST_TOO_SMALL(
+            Jobs_StartNext( buf, sizeof( prefix ), name_, nameLength_, NULL ) );
+        TEST_TOO_SMALL( Jobs_StartNext( buf,
+                                        sizeof( prefix ),
+                                        name_,
+                                        nameLength_,
+                                        &outLength ) );
         TEST_OUTLENGTH( prefix );
     }
 
     {
         char expected[] = PREFIX jobId_ "/" JOBS_API_DESCRIBE;
 
-        TEST_SUCCESS( Jobs_Describe( buf, sizeof( buf ), name_, nameLength_, jobId_, jobIdLength_, NULL ) );
-        TEST_SUCCESS( Jobs_Describe( buf, sizeof( buf ), name_, nameLength_, jobId_, jobIdLength_, &outLength ) );
+        TEST_SUCCESS( Jobs_Describe( buf,
+                                     sizeof( buf ),
+                                     name_,
+                                     nameLength_,
+                                     jobId_,
+                                     jobIdLength_,
+                                     NULL ) );
+        TEST_SUCCESS( Jobs_Describe( buf,
+                                     sizeof( buf ),
+                                     name_,
+                                     nameLength_,
+                                     jobId_,
+                                     jobIdLength_,
+                                     &outLength ) );
         TEST_OUTLENGTH( expected );
 
-        TEST_TOO_SMALL( Jobs_Describe( buf, sizeof( prefix ), name_, nameLength_, jobId_, jobIdLength_, NULL ) );
-        TEST_TOO_SMALL( Jobs_Describe( buf, sizeof( prefix ), name_, nameLength_, jobId_, jobIdLength_, &outLength ) );
+        TEST_TOO_SMALL( Jobs_Describe( buf,
+                                       sizeof( prefix ),
+                                       name_,
+                                       nameLength_,
+                                       jobId_,
+                                       jobIdLength_,
+                                       NULL ) );
+        TEST_TOO_SMALL( Jobs_Describe( buf,
+                                       sizeof( prefix ),
+                                       name_,
+                                       nameLength_,
+                                       jobId_,
+                                       jobIdLength_,
+                                       &outLength ) );
         TEST_OUTLENGTH( prefix );
     }
 
     {
         char expected[] = PREFIX jobId_ "/" JOBS_API_UPDATE;
 
-        TEST_SUCCESS( Jobs_Update( buf, sizeof( buf ), name_, nameLength_, jobId_, jobIdLength_, NULL ) );
-        TEST_SUCCESS( Jobs_Update( buf, sizeof( buf ), name_, nameLength_, jobId_, jobIdLength_, &outLength ) );
+        TEST_SUCCESS( Jobs_Update( buf,
+                                   sizeof( buf ),
+                                   name_,
+                                   nameLength_,
+                                   jobId_,
+                                   jobIdLength_,
+                                   NULL ) );
+        TEST_SUCCESS( Jobs_Update( buf,
+                                   sizeof( buf ),
+                                   name_,
+                                   nameLength_,
+                                   jobId_,
+                                   jobIdLength_,
+                                   &outLength ) );
         TEST_OUTLENGTH( expected );
 
-        TEST_TOO_SMALL( Jobs_Update( buf, sizeof( prefix ), name_, nameLength_, jobId_, jobIdLength_, NULL ) );
-        TEST_TOO_SMALL( Jobs_Update( buf, sizeof( prefix ), name_, nameLength_, jobId_, jobIdLength_, &outLength ) );
+        TEST_TOO_SMALL( Jobs_Update( buf,
+                                     sizeof( prefix ),
+                                     name_,
+                                     nameLength_,
+                                     jobId_,
+                                     jobIdLength_,
+                                     NULL ) );
+        TEST_TOO_SMALL( Jobs_Update( buf,
+                                     sizeof( prefix ),
+                                     name_,
+                                     nameLength_,
+                                     jobId_,
+                                     jobIdLength_,
+                                     &outLength ) );
         TEST_OUTLENGTH( prefix );
     }
 #undef TEST_SUCCESS
@@ -391,14 +732,15 @@ void test_Jobs_happy_path( void )
  */
 void test_Jobs_match_topic( void )
 {
-    char * topic, * jobId;
+    char *topic, *jobId;
     size_t topicLength, jobIdLength;
     JobsTopic_t api, outApi;
     char * outJobId;
     uint16_t outJobIdLength;
 
 #define setVars( x, y, z )                                     \
-    do {                                                       \
+    do                                                         \
+    {                                                          \
         api = ( x );                                           \
         topic = ( y );                                         \
         topicLength = sizeof( y ) - 1;                         \
@@ -407,21 +749,25 @@ void test_Jobs_match_topic( void )
     } while( 0 )
 
 #define TEST_SUCCESS( x )                        \
-    do {                                         \
+    do                                           \
+    {                                            \
         TEST_ASSERT_EQUAL( JobsSuccess, ( x ) ); \
         TEST_ASSERT_EQUAL( api, outApi );        \
     } while( 0 )
 
 #define TEST_NOMATCH( x )                        \
-    do {                                         \
+    do                                           \
+    {                                            \
         TEST_ASSERT_EQUAL( JobsNoMatch, ( x ) ); \
         TEST_ASSERT_EQUAL( api, outApi );        \
     } while( 0 )
 
 #define TEST_JOBID()                                                  \
-    do {                                                              \
+    do                                                                \
+    {                                                                 \
         TEST_ASSERT_EQUAL( jobIdLength, outJobIdLength );             \
-        if( jobId == NULL ) {                                         \
+        if( jobId == NULL )                                           \
+        {                                                             \
             TEST_ASSERT_EQUAL( outJobId, NULL );                      \
         }                                                             \
         else                                                          \
@@ -431,98 +777,333 @@ void test_Jobs_match_topic( void )
     } while( 0 )
 
     setVars( JobsJobsChanged, PREFIX "notify", NULL );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsNextJobChanged, PREFIX "notify-next", NULL );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsGetPendingSuccess, PREFIX "get/accepted", NULL );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsGetPendingFailed, PREFIX "get/rejected", NULL );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsStartNextSuccess, PREFIX "start-next/accepted", NULL );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsStartNextFailed, PREFIX "start-next/rejected", NULL );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsDescribeSuccess, PREFIX "12345/get/accepted", "12345" );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsDescribeFailed, PREFIX "ab224-z/get/rejected", "ab224-z" );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsDescribeSuccess, PREFIX "$next/get/accepted", "$next" );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsDescribeFailed, PREFIX "$next/get/rejected", "$next" );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsUpdateSuccess, PREFIX "12345/update/accepted", "12345" );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsUpdateFailed, PREFIX "ab224-z/update/rejected", "ab224-z" );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_SUCCESS( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_SUCCESS( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsInvalidTopic, PREFIX "notifyzz", NULL );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsInvalidTopic, PREFIX "ab224-z/update/rejectedzz", NULL );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsInvalidTopic, JOBS_API_PREFIX name_ "zz", NULL );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
-    setVars( JobsInvalidTopic, JOBS_API_PREFIX name_ "/jobz/" "notify", NULL );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    setVars( JobsInvalidTopic,
+             JOBS_API_PREFIX name_ "/jobz/"
+                                   "notify",
+             NULL );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
-    setVars( JobsInvalidTopic, JOBS_API_PREFIX "FOOBAR" JOBS_API_BRIDGE "notify", NULL );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    setVars( JobsInvalidTopic,
+             JOBS_API_PREFIX "FOOBAR" JOBS_API_BRIDGE "notify",
+             NULL );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
-    setVars( JobsInvalidTopic, "$awz/thingz/" name_ JOBS_API_BRIDGE "notify", NULL );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, topicLength, name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    setVars( JobsInvalidTopic,
+             "$awz/thingz/" name_ JOBS_API_BRIDGE "notify",
+             NULL );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   topicLength,
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 
     setVars( JobsInvalidTopic, PREFIX "notify", NULL );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, ( topicLength * 10 ), name_, nameLength_, &outApi, NULL, NULL ) );
-    TEST_NOMATCH( Jobs_MatchTopic( topic, ( topicLength * 10 ), name_, nameLength_, &outApi, &outJobId, &outJobIdLength ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   ( topicLength * 10 ),
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   NULL,
+                                   NULL ) );
+    TEST_NOMATCH( Jobs_MatchTopic( topic,
+                                   ( topicLength * 10 ),
+                                   name_,
+                                   nameLength_,
+                                   &outApi,
+                                   &outJobId,
+                                   &outJobIdLength ) );
     TEST_JOBID();
 }
 
@@ -532,7 +1113,7 @@ void test_Jobs_match_topic( void )
 
 void test_Jobs_asserts( void )
 {
-    char bufA[ 1 ], bufB[ 1 ], * p;
+    char bufA[ 1 ], bufB[ 1 ], *p;
     size_t x = 1, y = 1, z = 1;
     uint16_t j = 1;
     JobsTopic_t api;

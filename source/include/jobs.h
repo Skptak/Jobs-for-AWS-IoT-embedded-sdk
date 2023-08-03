@@ -4,22 +4,23 @@
  *
  * SPDX-License-Identifier: MIT
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 /**
@@ -37,7 +38,7 @@
 
 /* *INDENT-OFF* */
 #ifdef __cplusplus
-    extern "C" {
+extern "C" {
 #endif
 /* *INDENT-ON* */
 
@@ -45,40 +46,44 @@
  * @ingroup jobs_constants
  * @brief Maximum length of a thing name for the AWS IoT Jobs Service.
  */
-#define JOBS_THINGNAME_MAX_LENGTH    128U      /* per AWS IoT API Reference */
+#define JOBS_THINGNAME_MAX_LENGTH 128U /* per AWS IoT API Reference */
 
 /**
  * @ingroup jobs_constants
  * @brief Maximum length of a job ID for the AWS IoT Jobs Service.
  */
-#define JOBS_JOBID_MAX_LENGTH        64U       /* per AWS IoT API Reference */
+#define JOBS_JOBID_MAX_LENGTH     64U /* per AWS IoT API Reference */
 
 #ifndef THINGNAME_MAX_LENGTH
 
-/**
- * @brief User defined maximum length of a thing name for the application.
- *
- * <br><b>Default value</b>: @ref JOBS_THINGNAME_MAX_LENGTH "JOBS_THINGNAME_MAX_LENGTH"
- */
-    #define THINGNAME_MAX_LENGTH    JOBS_THINGNAME_MAX_LENGTH
+    /**
+     * @brief User defined maximum length of a thing name for the application.
+     *
+     * <br><b>Default value</b>: @ref JOBS_THINGNAME_MAX_LENGTH
+     * "JOBS_THINGNAME_MAX_LENGTH"
+     */
+    #define THINGNAME_MAX_LENGTH JOBS_THINGNAME_MAX_LENGTH
 #endif
 
 #ifndef JOBID_MAX_LENGTH
 
-/**
- * @brief User defined maximum length of a job ID for the application.
- *
- * <br><b>Default value</b>: @ref JOBS_JOBID_MAX_LENGTH "JOBS_JOBID_MAX_LENGTH"
- */
-    #define JOBID_MAX_LENGTH    JOBS_JOBID_MAX_LENGTH
+    /**
+     * @brief User defined maximum length of a job ID for the application.
+     *
+     * <br><b>Default value</b>: @ref JOBS_JOBID_MAX_LENGTH
+     * "JOBS_JOBID_MAX_LENGTH"
+     */
+    #define JOBID_MAX_LENGTH JOBS_JOBID_MAX_LENGTH
 #endif
 
-#if ( THINGNAME_MAX_LENGTH > JOBS_THINGNAME_MAX_LENGTH )
-    #error "The value of THINGNAME_MAX_LENGTH exceeds the AWS IoT Jobs Service limit."
+#if( THINGNAME_MAX_LENGTH > JOBS_THINGNAME_MAX_LENGTH )
+    #error \
+        "The value of THINGNAME_MAX_LENGTH exceeds the AWS IoT Jobs Service limit."
 #endif
 
-#if ( JOBID_MAX_LENGTH > JOBS_JOBID_MAX_LENGTH )
-    #error "The value of JOBID_MAX_LENGTH exceeds the AWS IoT Jobs Service limit."
+#if( JOBID_MAX_LENGTH > JOBS_JOBID_MAX_LENGTH )
+    #error \
+        "The value of JOBID_MAX_LENGTH exceeds the AWS IoT Jobs Service limit."
 #endif
 
 /**
@@ -86,47 +91,47 @@
  * Doxygen should ignore these macros as they are private.
  */
 
-#define JOBS_API_PREFIX                   "$aws/things/"
-#define JOBS_API_PREFIX_LENGTH            ( sizeof( JOBS_API_PREFIX ) - 1U )
+#define JOBS_API_PREFIX             "$aws/things/"
+#define JOBS_API_PREFIX_LENGTH      ( sizeof( JOBS_API_PREFIX ) - 1U )
 
-#define JOBS_API_BRIDGE                   "/jobs/"
-#define JOBS_API_BRIDGE_LENGTH            ( sizeof( JOBS_API_BRIDGE ) - 1U )
+#define JOBS_API_BRIDGE             "/jobs/"
+#define JOBS_API_BRIDGE_LENGTH      ( sizeof( JOBS_API_BRIDGE ) - 1U )
 
-#define JOBS_API_SUCCESS                  "/accepted"
-#define JOBS_API_SUCCESS_LENGTH           ( sizeof( JOBS_API_SUCCESS ) - 1U )
+#define JOBS_API_SUCCESS            "/accepted"
+#define JOBS_API_SUCCESS_LENGTH     ( sizeof( JOBS_API_SUCCESS ) - 1U )
 
-#define JOBS_API_FAILURE                  "/rejected"
-#define JOBS_API_FAILURE_LENGTH           ( sizeof( JOBS_API_FAILURE ) - 1U )
+#define JOBS_API_FAILURE            "/rejected"
+#define JOBS_API_FAILURE_LENGTH     ( sizeof( JOBS_API_FAILURE ) - 1U )
 
-#define JOBS_API_JOBSCHANGED              "notify"
-#define JOBS_API_JOBSCHANGED_LENGTH       ( sizeof( JOBS_API_JOBSCHANGED ) - 1U )
+#define JOBS_API_JOBSCHANGED        "notify"
+#define JOBS_API_JOBSCHANGED_LENGTH ( sizeof( JOBS_API_JOBSCHANGED ) - 1U )
 
-#define JOBS_API_NEXTJOBCHANGED           "notify-next"
-#define JOBS_API_NEXTJOBCHANGED_LENGTH    ( sizeof( JOBS_API_NEXTJOBCHANGED ) - 1U )
+#define JOBS_API_NEXTJOBCHANGED     "notify-next"
+#define JOBS_API_NEXTJOBCHANGED_LENGTH \
+    ( sizeof( JOBS_API_NEXTJOBCHANGED ) - 1U )
 
-#define JOBS_API_GETPENDING               "get"
-#define JOBS_API_GETPENDING_LENGTH        ( sizeof( JOBS_API_GETPENDING ) - 1U )
+#define JOBS_API_GETPENDING        "get"
+#define JOBS_API_GETPENDING_LENGTH ( sizeof( JOBS_API_GETPENDING ) - 1U )
 
-#define JOBS_API_STARTNEXT                "start-next"
-#define JOBS_API_STARTNEXT_LENGTH         ( sizeof( JOBS_API_STARTNEXT ) - 1U )
+#define JOBS_API_STARTNEXT         "start-next"
+#define JOBS_API_STARTNEXT_LENGTH  ( sizeof( JOBS_API_STARTNEXT ) - 1U )
 
-#define JOBS_API_DESCRIBE                 "get"
-#define JOBS_API_DESCRIBE_LENGTH          ( sizeof( JOBS_API_DESCRIBE ) - 1U )
+#define JOBS_API_DESCRIBE          "get"
+#define JOBS_API_DESCRIBE_LENGTH   ( sizeof( JOBS_API_DESCRIBE ) - 1U )
 
-#define JOBS_API_UPDATE                   "update"
-#define JOBS_API_UPDATE_LENGTH            ( sizeof( JOBS_API_UPDATE ) - 1U )
+#define JOBS_API_UPDATE            "update"
+#define JOBS_API_UPDATE_LENGTH     ( sizeof( JOBS_API_UPDATE ) - 1U )
 
-#define JOBS_API_JOBID_NEXT               "$next"
-#define JOBS_API_JOBID_NEXT_LENGTH        ( sizeof( JOBS_API_JOBID_NEXT ) - 1U )
+#define JOBS_API_JOBID_NEXT        "$next"
+#define JOBS_API_JOBID_NEXT_LENGTH ( sizeof( JOBS_API_JOBID_NEXT ) - 1U )
 
-#define JOBS_API_JOBID_NULL               ""
-#define JOBS_API_LEVEL_SEPARATOR          "/"
+#define JOBS_API_JOBID_NULL        ""
+#define JOBS_API_LEVEL_SEPARATOR   "/"
 
 #define JOBS_API_COMMON_LENGTH( thingNameLength ) \
     ( JOBS_API_PREFIX_LENGTH + ( thingNameLength ) + JOBS_API_BRIDGE_LENGTH )
 
 /** @endcond */
-
 
 /**
  * @cond DOXYGEN_IGNORE
@@ -135,11 +140,7 @@
 
 /* AWS IoT Jobs API topics. */
 #define JOBS_TOPIC_COMMON( thingName, jobId, jobsApi ) \
-    ( JOBS_API_PREFIX                                  \
-      thingName                                        \
-      JOBS_API_BRIDGE                                  \
-      jobId                                            \
-      jobsApi )
+    ( JOBS_API_PREFIX thingName JOBS_API_BRIDGE jobId jobsApi )
 /** @endcond */
 
 /**
@@ -201,23 +202,25 @@
  *
  * This macro should be used when the thing name and jobID are known at the
  * compile time. If next pending job is being queried, use $next as job ID.
- * If the thing name or job ID are not known at compile time, the #Jobs_Describe API
- * should be used instead.
+ * If the thing name or job ID are not known at compile time, the #Jobs_Describe
+ * API should be used instead.
  *
  * @param thingName The thing name as registered with AWS IoT Core.
  */
-#define JOBS_API_PUBLISH_DESCRIBENEXTJOB( thingName ) \
-    JOBS_TOPIC_COMMON( thingName, JOBS_API_JOBID_NEXT JOBS_API_LEVEL_SEPARATOR, JOBS_API_DESCRIBE )
+#define JOBS_API_PUBLISH_DESCRIBENEXTJOB( thingName )                \
+    JOBS_TOPIC_COMMON( thingName,                                    \
+                       JOBS_API_JOBID_NEXT JOBS_API_LEVEL_SEPARATOR, \
+                       JOBS_API_DESCRIBE )
 
 /**
  * @ingroup jobs_constants
- * @brief The size needed to hold the longest topic for a given thing name length.
+ * @brief The size needed to hold the longest topic for a given thing name
+ * length.
  * @note This includes space for a terminating NUL character.
  */
-#define JOBS_API_MAX_LENGTH( thingNameLength )                    \
-    ( JOBS_API_COMMON_LENGTH( thingNameLength ) +                 \
-      JOBID_MAX_LENGTH + sizeof( '/' ) + JOBS_API_UPDATE_LENGTH + \
-      JOBS_API_SUCCESS_LENGTH + 1U )
+#define JOBS_API_MAX_LENGTH( thingNameLength )                       \
+    ( JOBS_API_COMMON_LENGTH( thingNameLength ) + JOBID_MAX_LENGTH + \
+      sizeof( '/' ) + JOBS_API_UPDATE_LENGTH + JOBS_API_SUCCESS_LENGTH + 1U )
 
 /**
  * @ingroup jobs_enum_types
@@ -226,9 +229,11 @@
 typedef enum
 {
     JobsError = 0,
-    JobsSuccess,       /**< @brief The buffer was properly written or a match was found. */
-    JobsNoMatch,       /**< @brief The buffer does not contain a jobs topic. */
-    JobsBadParameter,  /**< @brief A function parameter was NULL or has an illegal value. */
+    JobsSuccess,      /**< @brief The buffer was properly written or a match was
+                         found. */
+    JobsNoMatch,      /**< @brief The buffer does not contain a jobs topic. */
+    JobsBadParameter, /**< @brief A function parameter was NULL or has an
+                         illegal value. */
     JobsBufferTooSmall /**< @brief The buffer write was truncated. */
 } JobsStatus_t;
 
@@ -320,7 +325,8 @@ typedef enum
  * if( status == JobsSuccess )
  * {
  *     // The topic string of length, topicLength, has been
- *     // generated in the buffer, topicBuffer, for the NextJobExecutionChanged API.
+ *     // generated in the buffer, topicBuffer, for the NextJobExecutionChanged
+ * API.
  *     // Subscribe to this topic using an MQTT client of your choice.
  * }
  * @endcode
@@ -343,7 +349,8 @@ JobsStatus_t Jobs_GetTopic( char * buffer,
  * @param[in] length  The length of the topic string.
  * @param[in] thingName  The device's thingName as registered with AWS IoT.
  * @param[in] thingNameLength  The length of the thingName.
- * @param[out] outApi  The jobs topic API value if present, e.g., JobsUpdateSuccess.
+ * @param[out] outApi  The jobs topic API value if present, e.g.,
+ * JobsUpdateSuccess.
  * @param[out] outJobId  The beginning of the jobID in the topic string.
  * @param[out] outJobIdLength  The length of the jobID in the topic string.
  *
@@ -372,7 +379,8 @@ JobsStatus_t Jobs_GetTopic( char * buffer,
  *
  * // Every device should have a unique thing name registered with AWS IoT Core.
  * // This example uses a dummy serial number for the thing name.
- * // The Jobs_MatchTopic API will check that the incoming message topic contains
+ * // The Jobs_MatchTopic API will check that the incoming message topic
+ * contains
  * // this thing name.
  * #define THING_NAME           "11223445566"
  * #define THING_NAME_LENGTH    ( sizeof( THING_NAME ) - 1U )
@@ -394,7 +402,8 @@ JobsStatus_t Jobs_GetTopic( char * buffer,
  * {
  *     // The Jobs_MatchTopic API has determined that the incoming topic is from
  *     // AWS IoT Jobs service for the expected thing name.
- *     // If the topic contains a jobID, then the pJobId and jobIdLength parameters
+ *     // If the topic contains a jobID, then the pJobId and jobIdLength
+ * parameters
  *     // populated by the API.
  *
  *     if( api == JobsJobsChanged )
@@ -406,19 +415,23 @@ JobsStatus_t Jobs_GetTopic( char * buffer,
  *     }
  *
  *     else if( api == JobsGetPendingSuccess )
- *     { // Received accepted response for request to GetPendingJobExecutions API.
+ *     { // Received accepted response for request to GetPendingJobExecutions
+ * API.
  *     }
  *
  *     else if( api == JobsGetPendingFailed )
- *     { // Received rejected response for request to GetPendingJobExecutions API.
+ *     { // Received rejected response for request to GetPendingJobExecutions
+ * API.
  *     }
  *
  *     else if( api == JobsStartNextSuccess )
- *     { // Received accepted response for request to StartNextPendingJobExecution API.
+ *     { // Received accepted response for request to
+ * StartNextPendingJobExecution API.
  *     }
  *
  *     else if( api == JobsStartNextFailed )
- *     { // Received rejected response for request to StartNextPendingJobExecution API.
+ *     { // Received rejected response for request to
+ * StartNextPendingJobExecution API.
  *     }
  *
  *     else if( api == JobsDescribeSuccess )
@@ -506,7 +519,8 @@ JobsStatus_t Jobs_MatchTopic( char * topic,
  * if( status == JobsSuccess )
  * {
  *     // The topic string of length, topicLength, has been
- *     // generated in the buffer, topicBuffer, for the GetPendingJobExecutions API.
+ *     // generated in the buffer, topicBuffer, for the GetPendingJobExecutions
+ * API.
  *     // Publish to this topic using an MQTT client of your choice.
  * }
  * @endcode
@@ -744,7 +758,7 @@ JobsStatus_t Jobs_Update( char * buffer,
 
 /* *INDENT-OFF* */
 #ifdef __cplusplus
-    }
+}
 #endif
 /* *INDENT-ON* */
 

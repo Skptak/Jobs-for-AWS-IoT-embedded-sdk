@@ -4,22 +4,23 @@
  *
  * SPDX-License-Identifier: MIT
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 /**
@@ -35,14 +36,14 @@
 
 typedef enum
 {
-    true = 1, false = 0
+    true = 1,
+    false = 0
 } bool_;
 
 /**
  * @brief Table of topic API strings in JobsTopic_t order.
  */
-static const char * const apiTopic[] =
-{
+static const char * const apiTopic[] = {
     JOBS_API_JOBSCHANGED,
     JOBS_API_NEXTJOBCHANGED,
     JOBS_API_GETPENDING JOBS_API_SUCCESS,
@@ -58,8 +59,7 @@ static const char * const apiTopic[] =
 /**
  * @brief Table of topic API string lengths in JobsTopic_t order.
  */
-static const size_t apiTopicLength[] =
-{
+static const size_t apiTopicLength[] = {
     JOBS_API_JOBSCHANGED_LENGTH,
     JOBS_API_NEXTJOBCHANGED_LENGTH,
     JOBS_API_GETPENDING_LENGTH + JOBS_API_SUCCESS_LENGTH,
@@ -81,8 +81,7 @@ static const size_t apiTopicLength[] =
  * @return true if the character is valid;
  * false otherwise
  */
-static bool_ isValidChar( char a,
-                          bool_ allowColon )
+static bool_ isValidChar( char a, bool_ allowColon )
 {
     bool_ ret;
 
@@ -134,8 +133,7 @@ static bool_ isValidID( const char * id,
 {
     bool_ ret = false;
 
-    if( ( id != NULL ) && ( length > 0U ) &&
-        ( length <= max ) )
+    if( ( id != NULL ) && ( length > 0U ) && ( length <= max ) )
     {
         size_t i;
 
@@ -153,7 +151,6 @@ static bool_ isValidID( const char * id,
     return ret;
 }
 
-
 /**
  * @brief Predicate returns true for a valid thing name string.
  *
@@ -166,8 +163,7 @@ static bool_ isValidID( const char * id,
 static bool_ isValidThingName( const char * thingName,
                                uint16_t thingNameLength )
 {
-    return isValidID( thingName, thingNameLength,
-                      THINGNAME_MAX_LENGTH, true );
+    return isValidID( thingName, thingNameLength, THINGNAME_MAX_LENGTH, true );
 }
 
 /**
@@ -179,11 +175,9 @@ static bool_ isValidThingName( const char * thingName,
  * @return true if the job ID is valid;
  * false otherwise
  */
-static bool_ isValidJobId( const char * jobId,
-                           uint16_t jobIdLength )
+static bool_ isValidJobId( const char * jobId, uint16_t jobIdLength )
 {
-    return isValidID( jobId, jobIdLength,
-                      JOBID_MAX_LENGTH, false );
+    return isValidID( jobId, jobIdLength, JOBID_MAX_LENGTH, false );
 }
 
 /**
@@ -242,12 +236,17 @@ static void writePreamble( char * buffer,
                            const char * thingName,
                            uint16_t thingNameLength )
 {
-    ( void ) strnAppend( buffer, start, length,
-                         JOBS_API_PREFIX, JOBS_API_PREFIX_LENGTH );
-    ( void ) strnAppend( buffer, start, length,
-                         thingName, thingNameLength );
-    ( void ) strnAppend( buffer, start, length,
-                         JOBS_API_BRIDGE, JOBS_API_BRIDGE_LENGTH );
+    ( void ) strnAppend( buffer,
+                         start,
+                         length,
+                         JOBS_API_PREFIX,
+                         JOBS_API_PREFIX_LENGTH );
+    ( void ) strnAppend( buffer, start, length, thingName, thingNameLength );
+    ( void ) strnAppend( buffer,
+                         start,
+                         length,
+                         JOBS_API_BRIDGE,
+                         JOBS_API_BRIDGE_LENGTH );
 }
 
 #define checkThingParams() \
@@ -273,19 +272,25 @@ JobsStatus_t Jobs_GetTopic( char * buffer,
     JobsStatus_t ret = JobsBadParameter;
     size_t start = 0U;
 
-    if( checkCommonParams() &&
-        ( api > JobsInvalidTopic ) && ( api < JobsMaxTopic ) )
+    if( checkCommonParams() && ( api > JobsInvalidTopic ) &&
+        ( api < JobsMaxTopic ) )
     {
         writePreamble( buffer, &start, length, thingName, thingNameLength );
 
         if( api >= JobsDescribeSuccess )
         {
-            ( void ) strnAppend( buffer, &start, length,
-                                 "+/", ( sizeof( "+/" ) - 1U ) );
+            ( void ) strnAppend( buffer,
+                                 &start,
+                                 length,
+                                 "+/",
+                                 ( sizeof( "+/" ) - 1U ) );
         }
 
-        ret = strnAppend( buffer, &start, length,
-                          apiTopic[ api ], apiTopicLength[ api ] );
+        ret = strnAppend( buffer,
+                          &start,
+                          length,
+                          apiTopic[ api ],
+                          apiTopicLength[ api ] );
 
         if( start == length )
         {
@@ -315,9 +320,7 @@ JobsStatus_t Jobs_GetTopic( char * buffer,
  * @return JobsSuccess if the sequences are the same;
  * JobsNoMatch otherwise
  */
-static JobsStatus_t strnEq( const char * a,
-                            const char * b,
-                            size_t n )
+static JobsStatus_t strnEq( const char * a, const char * b, size_t n )
 {
     size_t i;
 
@@ -369,13 +372,14 @@ static JobsStatus_t strnnEq( const char * a,
  * @return true if the job ID matches;
  * false otherwise
  */
-static bool_ isNextJobId( const char * jobId,
-                          uint16_t jobIdLength )
+static bool_ isNextJobId( const char * jobId, uint16_t jobIdLength )
 {
     bool_ ret = false;
 
-    if( ( jobId != NULL ) &&
-        ( strnnEq( JOBS_API_JOBID_NEXT, JOBS_API_JOBID_NEXT_LENGTH, jobId, jobIdLength ) == JobsSuccess ) )
+    if( ( jobId != NULL ) && ( strnnEq( JOBS_API_JOBID_NEXT,
+                                        JOBS_API_JOBID_NEXT_LENGTH,
+                                        jobId,
+                                        jobIdLength ) == JobsSuccess ) )
     {
         ret = true;
     }
@@ -383,13 +387,14 @@ static bool_ isNextJobId( const char * jobId,
     return ret;
 }
 
-
 /**
- * @brief Parse a job ID and search for the API portion of a topic string in a table.
+ * @brief Parse a job ID and search for the API portion of a topic string in a
+ * table.
  *
  * @param[in] topic  The topic string to check.
  * @param[in] topicLength  The length of the topic string.
- * @param[out] outApi  The jobs topic API value if present, e.g., #JobsUpdateSuccess.
+ * @param[out] outApi  The jobs topic API value if present, e.g.,
+ * #JobsUpdateSuccess.
  * @param[out] outJobId  The beginning of the jobID in the topic string.
  * @param[out] outJobIdLength  The length of the jobID in the topic string.
  *
@@ -410,8 +415,8 @@ static JobsStatus_t matchIdApi( char * topic,
     char * jobId = NULL;
     uint16_t jobIdLength = 0U;
 
-    assert( ( topic != NULL ) && ( outApi != NULL ) &&
-            ( outJobId != NULL ) && ( outJobIdLength != NULL ) );
+    assert( ( topic != NULL ) && ( outApi != NULL ) && ( outJobId != NULL ) &&
+            ( outJobIdLength != NULL ) );
 
     for( i = 0U; i < length; i++ )
     {
@@ -432,22 +437,35 @@ static JobsStatus_t matchIdApi( char * topic,
     if( ( isNextJobId( jobId, jobIdLength ) == true ) ||
         ( isValidJobId( jobId, jobIdLength ) == true ) )
     {
-        if( JobsSuccess == strnnEq( p, length, apiTopic[ JobsDescribeSuccess ], apiTopicLength[ JobsDescribeSuccess ] ) )
+        if( JobsSuccess == strnnEq( p,
+                                    length,
+                                    apiTopic[ JobsDescribeSuccess ],
+                                    apiTopicLength[ JobsDescribeSuccess ] ) )
         {
             ret = JobsSuccess;
             *outApi = JobsDescribeSuccess;
         }
-        else if( JobsSuccess == strnnEq( p, length, apiTopic[ JobsDescribeFailed ], apiTopicLength[ JobsDescribeFailed ] ) )
+        else if( JobsSuccess ==
+                 strnnEq( p,
+                          length,
+                          apiTopic[ JobsDescribeFailed ],
+                          apiTopicLength[ JobsDescribeFailed ] ) )
         {
             ret = JobsSuccess;
             *outApi = JobsDescribeFailed;
         }
-        else if( JobsSuccess == strnnEq( p, length, apiTopic[ JobsUpdateSuccess ], apiTopicLength[ JobsUpdateSuccess ] ) )
+        else if( JobsSuccess == strnnEq( p,
+                                         length,
+                                         apiTopic[ JobsUpdateSuccess ],
+                                         apiTopicLength[ JobsUpdateSuccess ] ) )
         {
             ret = JobsSuccess;
             *outApi = JobsUpdateSuccess;
         }
-        else if( JobsSuccess == strnnEq( p, length, apiTopic[ JobsUpdateFailed ], apiTopicLength[ JobsUpdateFailed ] ) )
+        else if( JobsSuccess == strnnEq( p,
+                                         length,
+                                         apiTopic[ JobsUpdateFailed ],
+                                         apiTopicLength[ JobsUpdateFailed ] ) )
         {
             ret = JobsSuccess;
             *outApi = JobsUpdateFailed;
@@ -472,7 +490,8 @@ static JobsStatus_t matchIdApi( char * topic,
  *
  * @param[in] topic  The topic string to check.
  * @param[in] topicLength  The length of the topic string.
- * @param[out] outApi  The jobs topic API value if present, e.g., #JobsUpdateSuccess.
+ * @param[out] outApi  The jobs topic API value if present, e.g.,
+ * #JobsUpdateSuccess.
  * @param[out] outJobId  The beginning of the jobID in the topic string.
  * @param[out] outJobIdLength  The length of the jobID in the topic string.
  *
@@ -488,36 +507,54 @@ static JobsStatus_t matchApi( char * topic,
 {
     JobsStatus_t ret = JobsNoMatch;
 
-    assert( ( topic != NULL ) && ( outApi != NULL ) &&
-            ( outJobId != NULL ) && ( outJobIdLength != NULL ) );
+    assert( ( topic != NULL ) && ( outApi != NULL ) && ( outJobId != NULL ) &&
+            ( outJobIdLength != NULL ) );
 
     /* The first set of APIs do not have job IDs. */
-    if( JobsSuccess == strnnEq( topic, topicLength, apiTopic[ JobsJobsChanged ], apiTopicLength[ JobsJobsChanged ] ) )
+    if( JobsSuccess == strnnEq( topic,
+                                topicLength,
+                                apiTopic[ JobsJobsChanged ],
+                                apiTopicLength[ JobsJobsChanged ] ) )
     {
         ret = JobsSuccess;
         *outApi = JobsJobsChanged;
     }
-    else if( JobsSuccess == strnnEq( topic, topicLength, apiTopic[ JobsNextJobChanged ], apiTopicLength[ JobsNextJobChanged ] ) )
+    else if( JobsSuccess == strnnEq( topic,
+                                     topicLength,
+                                     apiTopic[ JobsNextJobChanged ],
+                                     apiTopicLength[ JobsNextJobChanged ] ) )
     {
         ret = JobsSuccess;
         *outApi = JobsNextJobChanged;
     }
-    else if( JobsSuccess == strnnEq( topic, topicLength, apiTopic[ JobsGetPendingSuccess ], apiTopicLength[ JobsGetPendingSuccess ] ) )
+    else if( JobsSuccess == strnnEq( topic,
+                                     topicLength,
+                                     apiTopic[ JobsGetPendingSuccess ],
+                                     apiTopicLength[ JobsGetPendingSuccess ] ) )
     {
         ret = JobsSuccess;
         *outApi = JobsGetPendingSuccess;
     }
-    else if( JobsSuccess == strnnEq( topic, topicLength, apiTopic[ JobsGetPendingFailed ], apiTopicLength[ JobsGetPendingFailed ] ) )
+    else if( JobsSuccess == strnnEq( topic,
+                                     topicLength,
+                                     apiTopic[ JobsGetPendingFailed ],
+                                     apiTopicLength[ JobsGetPendingFailed ] ) )
     {
         ret = JobsSuccess;
         *outApi = JobsGetPendingFailed;
     }
-    else if( JobsSuccess == strnnEq( topic, topicLength, apiTopic[ JobsStartNextSuccess ], apiTopicLength[ JobsStartNextSuccess ] ) )
+    else if( JobsSuccess == strnnEq( topic,
+                                     topicLength,
+                                     apiTopic[ JobsStartNextSuccess ],
+                                     apiTopicLength[ JobsStartNextSuccess ] ) )
     {
         ret = JobsSuccess;
         *outApi = JobsStartNextSuccess;
     }
-    else if( JobsSuccess == strnnEq( topic, topicLength, apiTopic[ JobsStartNextFailed ], apiTopicLength[ JobsStartNextFailed ] ) )
+    else if( JobsSuccess == strnnEq( topic,
+                                     topicLength,
+                                     apiTopic[ JobsStartNextFailed ],
+                                     apiTopicLength[ JobsStartNextFailed ] ) )
     {
         ret = JobsSuccess;
         *outApi = JobsStartNextFailed;
@@ -556,7 +593,8 @@ JobsStatus_t Jobs_MatchTopic( char * topic,
     char * jobId = NULL;
     uint16_t jobIdLength = 0U;
 
-    if( ( topic != NULL ) && ( outApi != NULL ) && checkThingParams() && ( length > 0U ) )
+    if( ( topic != NULL ) && ( outApi != NULL ) && checkThingParams() &&
+        ( length > 0U ) )
     {
         ret = JobsNoMatch;
 
@@ -568,12 +606,15 @@ JobsStatus_t Jobs_MatchTopic( char * topic,
             char * bridge = &name[ thingNameLength ];
 
             /* check the shortest match first */
-            if( ( strnEq( bridge, JOBS_API_BRIDGE, JOBS_API_BRIDGE_LENGTH ) == JobsSuccess ) &&
-                ( strnEq( prefix, JOBS_API_PREFIX, JOBS_API_PREFIX_LENGTH ) == JobsSuccess ) &&
+            if( ( strnEq( bridge, JOBS_API_BRIDGE, JOBS_API_BRIDGE_LENGTH ) ==
+                  JobsSuccess ) &&
+                ( strnEq( prefix, JOBS_API_PREFIX, JOBS_API_PREFIX_LENGTH ) ==
+                  JobsSuccess ) &&
                 ( strnEq( name, thingName, thingNameLength ) == JobsSuccess ) )
             {
                 char * tail = &bridge[ JOBS_API_BRIDGE_LENGTH ];
-                size_t tailLength = length - JOBS_API_COMMON_LENGTH( thingNameLength );
+                size_t tailLength = length -
+                                    JOBS_API_COMMON_LENGTH( thingNameLength );
 
                 ret = matchApi( tail, tailLength, &api, &jobId, &jobIdLength );
             }
@@ -616,8 +657,11 @@ JobsStatus_t Jobs_GetPending( char * buffer,
     {
         writePreamble( buffer, &start, length, thingName, thingNameLength );
 
-        ret = strnAppend( buffer, &start, length,
-                          JOBS_API_GETPENDING, JOBS_API_GETPENDING_LENGTH );
+        ret = strnAppend( buffer,
+                          &start,
+                          length,
+                          JOBS_API_GETPENDING,
+                          JOBS_API_GETPENDING_LENGTH );
 
         start = ( start >= length ) ? ( length - 1U ) : start;
         buffer[ start ] = '\0';
@@ -649,8 +693,11 @@ JobsStatus_t Jobs_StartNext( char * buffer,
     {
         writePreamble( buffer, &start, length, thingName, thingNameLength );
 
-        ret = strnAppend( buffer, &start, length,
-                          JOBS_API_STARTNEXT, JOBS_API_STARTNEXT_LENGTH );
+        ret = strnAppend( buffer,
+                          &start,
+                          length,
+                          JOBS_API_STARTNEXT,
+                          JOBS_API_STARTNEXT_LENGTH );
 
         start = ( start >= length ) ? ( length - 1U ) : start;
         buffer[ start ] = '\0';
@@ -663,7 +710,6 @@ JobsStatus_t Jobs_StartNext( char * buffer,
 
     return ret;
 }
-
 
 /**
  * See jobs.h for docs.
@@ -687,12 +733,14 @@ JobsStatus_t Jobs_Describe( char * buffer,
     {
         writePreamble( buffer, &start, length, thingName, thingNameLength );
 
-        ( void ) strnAppend( buffer, &start, length,
-                             jobId, jobIdLength );
-        ( void ) strnAppend( buffer, &start, length,
-                             "/", ( sizeof( "/" ) - 1U ) );
-        ret = strnAppend( buffer, &start, length,
-                          JOBS_API_DESCRIBE, JOBS_API_DESCRIBE_LENGTH );
+        ( void ) strnAppend( buffer, &start, length, jobId, jobIdLength );
+        ( void )
+            strnAppend( buffer, &start, length, "/", ( sizeof( "/" ) - 1U ) );
+        ret = strnAppend( buffer,
+                          &start,
+                          length,
+                          JOBS_API_DESCRIBE,
+                          JOBS_API_DESCRIBE_LENGTH );
 
         start = ( start >= length ) ? ( length - 1U ) : start;
         buffer[ start ] = '\0';
@@ -722,17 +770,18 @@ JobsStatus_t Jobs_Update( char * buffer,
     JobsStatus_t ret = JobsBadParameter;
     size_t start = 0U;
 
-    if( checkCommonParams() &&
-        ( isValidJobId( jobId, jobIdLength ) == true ) )
+    if( checkCommonParams() && ( isValidJobId( jobId, jobIdLength ) == true ) )
     {
         writePreamble( buffer, &start, length, thingName, thingNameLength );
 
-        ( void ) strnAppend( buffer, &start, length,
-                             jobId, jobIdLength );
-        ( void ) strnAppend( buffer, &start, length,
-                             "/", ( sizeof( "/" ) - 1U ) );
-        ret = strnAppend( buffer, &start, length,
-                          JOBS_API_UPDATE, JOBS_API_UPDATE_LENGTH );
+        ( void ) strnAppend( buffer, &start, length, jobId, jobIdLength );
+        ( void )
+            strnAppend( buffer, &start, length, "/", ( sizeof( "/" ) - 1U ) );
+        ret = strnAppend( buffer,
+                          &start,
+                          length,
+                          JOBS_API_UPDATE,
+                          JOBS_API_UPDATE_LENGTH );
 
         start = ( start >= length ) ? ( length - 1U ) : start;
         buffer[ start ] = '\0';
