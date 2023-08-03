@@ -1,7 +1,5 @@
-{ "expected-missing-functions":
-  [
-
-  ],
+{
+  "expected-missing-functions": [],
   "proof-name": "Jobs_GetTopic",
   "proof-root": "../test/cbmc/proofs"
 }

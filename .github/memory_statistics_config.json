@@ -1,9 +1,5 @@
 {
-    "lib_name": "AWS IoT Jobs",
-    "src": [
-        "source/jobs.c"
-    ],
-    "include": [
-        "source/include"
-    ]
+  "lib_name": "AWS IoT Jobs",
+  "src": ["source/jobs.c"],
+  "include": ["source/include"]
 }
