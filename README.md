@@ -1,5 +1,7 @@
 ## AWS IoT Jobs library
 
+**[API Documentation Pages for current and previous releases of this library can be found here](https://aws.github.io/Jobs-for-AWS-IoT-embedded-sdk/)**
+
 The AWS IoT Jobs library helps you notify connected IoT devices of a pending
 [Job](https://freertos.org/jobs/jobs-terminology.html). A Job can be used to
 manage your fleet of devices, update firmware and security certificates on your
